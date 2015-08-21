@@ -112,6 +112,10 @@ function newAddItemFormInitialization()
                    dhmtlxForm.send("AddFormItem","get",function(loader,response){
                        
                        alert("Item Saved")
+                       dhtmlxTree = null;
+                       treeInitialization();
+                       dhtmlxTree.openAllItems(0);
+                  
                    })
                 }
                 if(id === "cancel")
@@ -131,11 +135,11 @@ function newAddItemFormInitialization()
          function treeInitialization()
          {
              dhtmlxTree = dhtmlXLayoutObject.cells("d").attachTree();
-             dhtmlxTree.loadXML("assets/TreeXML.xml");
+             dhtmlxTree.loadXML("FormItemMenu");
              dhtmlxTree.setImagePath("assets/codebase/imgs/dhxtree_skyblue/");
              dhtmlxTree.enableDragAndDrop(true,true);
              dhtmlxTree.enableMercyDrag(true);
-             dhtmlxTree.attachEvent("onDrop", function(node, fileData){ });
+             dhtmlxTree.attachEvent("onDrop", function(node, fileData){alert(); });
              
          }
 /* -------------------------------- Tree  Initialization Ends -----------------------------  */ 
@@ -145,10 +149,14 @@ function newAddItemFormInitialization()
         { 
             dhtmlxGrid = dhtmlXLayoutObject.cells("b").attachGrid();
             dhtmlxGrid.setHeader("Id,FieldName,FieldDataType,FieldSize");
-            dhtmlxGrid.enableDragAndDrop(true,true);
+             dhtmlxGrid.enableDragAndDrop(true);
+            dhtmlxGrid.enableMercyDrag(true);
             dhtmlxGrid.init();
             dhtmlxGrid.attachEvent("onDrop", function(node, filedata)
             {
+               console.log(dhtmlxTree.getUserData("datatype",200))
+                console.log(node);
+                console.log(filedata);
             });
             
             
