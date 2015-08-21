@@ -8,10 +8,14 @@
 /* -----------------------------All Global Objects Declaration-------------------------*/
                   var dhtmlXLayoutObject;
                   var dhtmlxToolbar;
+                  var dhtmlxFormBuilderToolbar;
                   var dhtmlxWindow;
                   var dhtmlxGrid;  
                   var dhmtlxForm;
                   var dhtmlxTree;
+                  var TemporaryRowId;
+                
+         
 /* ----------------------------------Global Objects Ends------------------------------*/
 
 
@@ -21,7 +25,8 @@
                 {
                             layoutInitialization();
                             toolBarInitialization();
-                            treeInitialization();                
+                            treeInitialization();     
+                            dhtmlxFormBuilderToolbarInitialization();
                             gridInitialization()
                 }
                 
@@ -39,9 +44,9 @@
                                                 cells:
                                                 [
                                                 {id : "a",text : "Form List",width : 300 },           
-                                                {id : "b",text : "Form"} ,
+                                                {id : "b",text : "Form Builder"} ,
                                                 {id : "c",text : "Grid View"} ,
-                                                {id : "d",text : "Form Builder", width:300}     
+                                                {id : "d",text : "Select Your Form Items", width:300}     
                                                 ]
                                             });   
                                            
@@ -129,8 +134,6 @@ function newAddItemFormInitialization()
  /* ------------------------------- Form  Initialization Ends -----------------------------  */ 
  
  
- 
- 
  /* ------------------------------- Tree  Initialization Starts -----------------------------  */ 
          function treeInitialization()
          {
@@ -139,7 +142,7 @@ function newAddItemFormInitialization()
              dhtmlxTree.setImagePath("assets/codebase/imgs/dhxtree_skyblue/");
              dhtmlxTree.enableDragAndDrop(true,true);
              dhtmlxTree.enableMercyDrag(true);
-             dhtmlxTree.attachEvent("onDrop", function(node, fileData){alert(); });
+      
              
          }
 /* -------------------------------- Tree  Initialization Ends -----------------------------  */ 
@@ -147,18 +150,68 @@ function newAddItemFormInitialization()
 /* -------------------------------- Grid intialization Starts ------------------------------  */ 
         function gridInitialization()
         { 
-            dhtmlxGrid = dhtmlXLayoutObject.cells("b").attachGrid();
-            dhtmlxGrid.setHeader("Id,FieldName,FieldDataType,FieldSize");
-             dhtmlxGrid.enableDragAndDrop(true);
+            dhtmlxGrid = dhtmlXLayoutObject.cells("b").attachGrid();           
+            dhtmlxGrid.setHeader("Field Name,Field Data Type, Field Size",null,["text-align:center","text-align:center","text-align:center"]);            
+            dhtmlxGrid.setColAlign("center,center,center");
+            
+            dhtmlxGrid.enableDragAndDrop(true);
             dhtmlxGrid.enableMercyDrag(true);
             dhtmlxGrid.init();
             dhtmlxGrid.attachEvent("onDrop", function(node, filedata)
             {
-               console.log(dhtmlxTree.getUserData("datatype",200))
-                console.log(node);
-                console.log(filedata);
+                  console.log(node);
+                  if(node==500 || node==600)
+                  {
+                      alert("Folder Selected");
+                  }
+                  else
+                  {
+                      alert("Item Selected");
+//                  dhtmlxGrid.cells(TemporaryRowId,0).setValue(dhtmlxTree.getUserData(node,"col_name"));         
+//                  dhtmlxGrid.cells(TemporaryRowId,1).setValue(dhtmlxTree.getUserData(node,"col_datatype"));       
+//                  dhtmlxGrid.cells(TemporaryRowId,2).setValue(dhtmlxTree.getUserData(node,"col_size"));            
+                  }
             });
-            
-            
+            dhtmlxGrid.attachEvent("onRowCreated", function(rId,rObj,rXml)
+            {
+                TemporaryRowId = rId;
+            });
         }
  /* ------------------------------- Grid intialization Ends -----------------------------  */ 
+ 
+ 
+ /* ---------------------- Form Builder Toolbar Initialization Starts -----------------*/
+     function dhtmlxFormBuilderToolbarInitialization()
+        {
+           dhtmlxFormBuilderToolbar =  dhtmlXLayoutObject.cells("b").attachToolbar();
+           dhtmlxFormBuilderToolbar.loadStruct("assets/FormbuilderToolbarXML.xml");
+           addFormBuilderToolBarEvents();
+           
+        }
+        
+        function addFormBuilderToolBarEvents()
+        {
+           dhtmlxFormBuilderToolbar.attachEvent("onClick",function(toolbarButtonId){            
+                    if(toolbarButtonId === "saveForm")
+                    {
+                      
+                       sendItemsGridToServer();                       
+                    }
+            
+        });
+        }
+      
+        function sendItemsGridToServer()
+        {
+             console.log(dhtmlxGrid.cells(1,1).gettValue());
+             var rowCount = dhtmlxGrid.getRowsNum();
+             for(var i=0;i<rowCount;i++)
+             {
+                // AddForm?row=5&parama1=IDvarchar20&param2=Namevarchar30
+                 
+             }
+             
+                 
+            
+        }
+ /* ---------------------- Form Builder Toolbar Initialization Ends -----------------*/
