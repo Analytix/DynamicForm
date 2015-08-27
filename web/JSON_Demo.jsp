@@ -17,10 +17,11 @@
 *** Structure of JSON
      {"KEY":"VALUE","KEY2":"VALUE2",....} -> This is Single Object
      {"KEY":"VALUE"}, {"KEY":"VALUE"}  -> This is Multiple Objects
-     {"S1":  [
-               {"Name":"Masaddat Mallick"}, {"Name":"Chanky Mallick"}   - > This Array of Objects Inside another Object (S1).
-               ]
-     };         
+     var data =  {"STUDENTS": 
+                            [
+                            {"Name":"Masaddat Mallick"}, {"Name":"Chanky Mallick"}   - > This Array of Objects Inside another Object (STUDENTS).
+                            ]
+                        };         
 -->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -28,6 +29,8 @@
 <html>
         <head>
             <script>
+              function tempContainer()
+              {  
             //Parsing JSON Text Using Eval Function
                         var jsonString2 = '{"NAME":"Shahrukh Khan"}';
                         var parsedJsonusingEval = eval('('+jsonString2+')'); //Use of  ('('+...+')') is must to avoid Javascript Syntax Ambiguity
@@ -41,14 +44,13 @@
               //JSON.parse() callback Method after Every KEY:VALUE pair
                         var jsonString = ' {"S1": [ {"Name":"SLK"},{"Name":"US"}, {"Name":"IND"} ] } ';
                         var parsedJson3 = JSON.parse(jsonString,function(key,value){ 
-                                                                                                        if(value=='US')
+                                                                                                        if(value==='US')
                                                                                                         return "UNITED STATES";
-                                                                                                        else if(value=='IND')
-                                                                                                        return "INDIA"
+                                                                                                        else if(value==='IND')
+                                                                                                        return "INDIA";
                                                                                                         else                                                                                                      
                                                                                                         return value;    
                                                                                                     });
-                                                                                                   
                         console.log(parsedJson3.S1[0].Name);
                         console.log(parsedJson3.S1[1].Name);
                         console.log(parsedJson3.S1[2].Name);
@@ -87,31 +89,54 @@
                                                         ]
                                                 };       
                          var stringObject2 =   JSON.stringify(JsonObject6,function(key,value){
-                                                                if(value=="CHANKY")
-                                                                    return "MASADDAT"
-                                                                else if (value=="SRK")
-                                                                    return "SHAHRUKH"
+                                                                if(value==="CHANKY")
+                                                                    return "MASADDAT";
+                                                                else if (value==="SRK")
+                                                                    return "SHAHRUKH";
                                                                 else
-                                                                    return value
+                                                                    return value;
                                                               });
                          console.log("JSON Converted to String Replacer Callback >> "+stringObject2);
             /*------------------------------------------------------------------------------------------------------------------*/       
-            //Adding Dynamic Objects to JSON variables
-            
-//                       var JsonObject7 = {"S1":[
-//                                                        {"Name":"CHANKY"},
-//                                                        {"Name":"SRK"}
-//                                                        ]
-//                                                };
-                          var JsonObject7.S1[0]="SRK"; 
-                                                
+            // Adding Dynamic Objects to JSON variables            
+                       var JsonObject7 = {"S1":[
+                                                        {"Name":"ABC"},
+                                                        {"Name":"SRK"}
+                                                        ]
+                                                };
                         console.log("SIZE OF JSON OBJECT :"+JsonObject7.S1.length);                          
-                       //JsonObject7.S1.Name="SALMAN";
-                        //console.log("DYNAMIC ELEMENT OUTPUT"+  JsonObject7.S1[2].Name);
-                        console.log("SIZE OF JSON OBJECT AFTER ADD OBJECT:"+JsonObject7.S1.length);             
-            
-            
-            
-            </script>
+                        JsonObject7['S1'].push({"Name":"SALMAN"});     
+            // Traversing JSON object using for in Loop
+                        for(variable in JsonObject7.S1)
+                        {
+                                console.log(JsonObject7.S1[variable].Name);
+                        }
+                        console.log("Newly Parsed JSON OBJECT after Adding Element :"+  JsonObject7.S1[0].Name);
+                        console.log("SIZE OF New JSON OBJECT AFTER ADD OBJECT:"+JsonObject7.S1.length);       
+           /*--------------------------------------------------------------------------------------------------------------------------*/  
+                }
+            //Getting Ajax Response from JSON
+               function ajaxResponse()
+               {
+                var  JSON_AjaxResponse 
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() 
+                            {
+                            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+                                    {
+                                    JSON_AjaxResponse = JSON.parse(xmlhttp.responseText);
+                                    }
+                             }
+                                xmlhttp.open("GET", "JSON_APP", false); 
+                                xmlhttp.send();
+               //*** Making Synchronus "false" will able to store the ajax response into Global Variable by waiting for Entire Response to Come                            
+                console.log(Object.keys(JSON_AjaxResponse).length);        
+                    for(variable in JSON_AjaxResponse)
+                    {
+                       console.log(JSON_AjaxResponse[variable]); // Showing JSON data with Dynamic Property Name.                   
+                    }
+                }
+            </script>         
         </head>    
+        <body onload="ajaxResponse()"></body>
 </html>
