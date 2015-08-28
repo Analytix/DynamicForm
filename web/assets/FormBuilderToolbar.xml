@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<toolbar>
+   <item id="label" type="text" text="Form Name" img="assets/icons/add_list.png" title="Create New Form"/>
+   <item id="sep01" type="separator" />  
+   <item id="formName" type="buttonInput" text="" title="Add Form Item"/>
+    <item id="sep02" type="separator" />  
+    <item id="ceateform" type="button" text="Create New Form" img="assets/icons/addform.png" title="Delete Item"/>
+     <item id="sep03" type="separator" />  
+   <item id="delete" type="button" text="Delete Row" img="assets/icons/delete_1.png" title="Delete Item"/>
+   <item id="sep04" type="separator" />  
+</toolbar>

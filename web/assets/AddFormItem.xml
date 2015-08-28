@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>            
+            <item type="fieldset" name="data" label="Add New  Item" inputWidth="480"  > 
+            <item type="input" label="Item Id:" value="Automatic" labelWidth="180" inputWidth="200" readonly="true" />
+            <item type="input" name="col_name" label="Column Name:" value="" labelWidth="180" inputWidth="200" />  
+            <item type="combo" name="col_datatype" label="Column Datatype" value="" labelWidth="180" inputWidth="200" >
+                    <option value="varchar" text="Varchar"/>
+                    <option value="integer" text="Integer"/>                   
+            </item> 
+             <item type="input" name="col_size" label="Column Size" value="" labelWidth="180" inputWidth="200" />  
+            </item>
+            <item type="button" name="Add" value="Add" position="absolute" inputTop="170" inputLeft="170" /> 
+            <item type="button" name="cancel" value="Close" position="absolute" inputTop="170" inputLeft="250"/> 
+</items>
