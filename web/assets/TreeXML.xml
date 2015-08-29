@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree id="0"> 
+  <item text="Integer" id="1" child="1">      
+      <item text="Employee Id" id="11" child="0"/> 
+      <item text="Mobile Number" id="12" child="0" /> 
+  </item> 
+  
+  
+  <item text="Integer" id="2" child="1">      
+      <item text="Employee Id" id="21" child="0"/> 
+      <item text="Mobile Number" id="221" child="1"> 
+          
+            <item text="Employee Id" id="212" child="0"/> 
+            <item text="Mobile Number" id="223" child="1">
+                   <item text="Employee Id" id="2121" child="0"/> 
+                   <item text="Mobile Number" id="2232" child="0"/>
+             </item>
+          
+      </item>
+  </item> 
+
+  
+  <item text="Integer" id="3" child="1">      
+      <item text="Employee Id" id="31" child="0"/> 
+      <item text="Mobile Number" id="32" child="0" /> 
+  </item> 
+
+  
+  <item text="Integer" id="4" child="1">      
+      <item text="Employee Id" id="41" child="0"/> 
+      <item text="Mobile Number" id="42" child="0" /> 
+  </item> 
+  <item text="Varchar" id="44"/>
+  
+  <item text="Integer" id="5" child="1">      
+      <item text="Employee Id" id="51" child="0"/> 
+      <item text="Mobile Number" id="52" child="0" /> 
+  </item> 
+  <item text="Varchar" id="45"/>
+</tree>

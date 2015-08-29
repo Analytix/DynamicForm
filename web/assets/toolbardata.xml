@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<toolbar>
+   <item id="newForm" type="button" text="Build New Form" img="assets/icons/add_list.png" title="Create New Form"/>
+   <item id="sep01" type="separator" />  
+   <item id="newFormItem" type="button" text="Add Form Item" img="assets/icons/edit.png" title="Add Form Item"/>
+    <item id="sep02" type="separator" />  
+   <item id="refresh" type="button" text="Refresh" img="assets/icons/view.png" title="Refresh"/>
+</toolbar>
